@@ -26,5 +26,42 @@ namespace VacationMasters
         {
             this.InitializeComponent();
         }
+
+        private void home_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage), null);
+        }
+
+        private void packages_Click(object sender, RoutedEventArgs e)
+        {
+           // this.Frame.Navigate(typeof(Packages), null);
+
+        }
+
+        private void user_panel_Click(object sender, RoutedEventArgs e)
+        {
+            // this.Frame.Navigate(typeof(UserPanel), null);
+
+        }
+
+        private void admin_control_Click(object sender, RoutedEventArgs e)
+        {
+            // this.Frame.Navigate(typeof(AdminControl), null);
+        }
+
+        private void contact_Click(object sender, RoutedEventArgs e)
+        {
+            // this.Frame.Navigate(typeof(Contact), null);
+        }
+
+
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+ 
+       
     }
 }

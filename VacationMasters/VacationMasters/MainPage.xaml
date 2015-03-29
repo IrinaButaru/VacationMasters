@@ -8,6 +8,51 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Left" Height="67" Margin="10,10,0,0" VerticalAlignment="Top" Width="409">
+            <TextBlock TextWrapping="Wrap" Text="? LOGO ??" FontSize="16"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="457" Margin="479,10,0,0" VerticalAlignment="Top" Width="877"/>
+        <Button x:Name="search" Content="Search" HorizontalAlignment="Left" Margin="210,119,0,0" VerticalAlignment="Top" Click="search_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,182,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="32" Width="58" FontSize="16" SelectionChanged="TextBlock_SelectionChanged"/>
+        <TextBox x:Name="name" HorizontalAlignment="Left" Margin="130,182,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="231"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,236,0,0" TextWrapping="Wrap" Text="Min Price" VerticalAlignment="Top" Height="31" Width="69" FontSize="16"/>
+        <TextBox x:Name="min_price" HorizontalAlignment="Left" Margin="130,236,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" TextChanged="TextBox_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="201,236,0,0" TextWrapping="Wrap" Text="Max Price" VerticalAlignment="Top" FontSize="16" Height="34" Width="76"/>
+        <TextBox x:Name="max_price" HorizontalAlignment="Left" Margin="277,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="type"  HorizontalAlignment="Left" Margin="130,296,0,0" VerticalAlignment="Top" Width="231" Height="26" MaxDropDownHeight="6" SelectionChanged="ComboBox_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="0,308,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Type" VerticalAlignment="Top" Height="26" Width="100" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,344,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="Begin Date" VerticalAlignment="Top" Height="23" Width="120" FontSize="16"/>
+        <DatePicker x:Name="begin_date" HorizontalAlignment="Left" Margin="130,337,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,406,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="End Date" VerticalAlignment="Top" Height="25" Width="105" FontSize="16"/>
+        <DatePicker x:Name="end_date"  HorizontalAlignment="Left" Margin="130,399,0,0" VerticalAlignment="Top"/>
+        <StackPanel HorizontalAlignment="Left" Height="474" Margin="479,10,0,0" VerticalAlignment="Top" Width="877">
+            <StackPanel Height="83">
+                <StackPanel Height="37" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <HyperlinkButton x:Name="login"  Content="Login" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    <HyperlinkButton x:Name="register" Content="Register" HorizontalAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Height="44" Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <Button x:Name="home" Content="Home" FontSize="16"  HorizontalAlignment="Left" Click="home_Click" />
+                    <Button x:Name="packages" Content="Packages" FontSize="16"  HorizontalAlignment="Left" Click="packages_Click" />
+                    <Button x:Name="user_panel" Content="User Panel" FontSize="16"  HorizontalAlignment="Left" Click="user_panel_Click" />
+                    <Button x:Name="admin_control" Content="Admin Control" FontSize="16"  HorizontalAlignment="Left" Click="admin_control_Click" />
+                    <Button x:Name="contact" Content="Contact" FontSize="16"  HorizontalAlignment="Left" Click="contact_Click" />
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Height="290">
+                <ScrollViewer Height="287"/>
+            </StackPanel>
+            <StackPanel Height="104" Orientation="Vertical" RenderTransformOrigin="0.502,0.708">
+                <TextBlock TextWrapping="Wrap" Text="You can contact us at" Height="25" Margin="0,0,694,0" HorizontalAlignment="Center" FontSize="16"/>
+                <TextBlock TextWrapping="Wrap" Text="Address:" Height="25" Margin="0,0,694,0" HorizontalAlignment="Left" FontSize="16" SelectionChanged="TextBlock_SelectionChanged"/>
+                <TextBlock TextWrapping="Wrap" Text="Phone:" Height="25" Margin="0,0,694,0" HorizontalAlignment="Left" FontSize="16"/>
+                <TextBlock TextWrapping="Wrap" Text="Email:" Height="25" Margin="0,0,694,0" HorizontalAlignment="Left" FontSize="16"/>
+            </StackPanel>
+        </StackPanel>
+
+
+
 
     </Grid>
 </Page>
