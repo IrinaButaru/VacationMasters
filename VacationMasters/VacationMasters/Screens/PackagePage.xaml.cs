@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -16,8 +18,9 @@ using VacationMasters.Wrappers;
 
 namespace VacationMasters.Screens
 {
-    public sealed partial class PackagePage : UserControl
+    public sealed partial class PackagePage : UserControl, INotifyPropertyChanged
     {
+
         private readonly PackageManager _packageManager;
         private int _orderId;
 
@@ -27,7 +30,28 @@ namespace VacationMasters.Screens
             var dbWrapper = new DbWrapper();
             _packageManager = new PackageManager(dbWrapper);
         }
+        private bool _isRatingEnabled;
+        public bool IsRatingEnabled
+        {
+            get { return _isRatingEnabled; }
+            set
+            {
+                if (value != _isRatingEnabled)
+                {
+                    _isRatingEnabled = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         private void ReserveOrCancel_OnClick(object sender, RoutedEventArgs e)
         {
             var package = MainPage.SelectedPackage;
@@ -62,6 +86,7 @@ namespace VacationMasters.Screens
             TypeTextBlock.Text = tab + package.Type;
             IncludedTextBlock.Text = tab + package.Included;
             PriceTextBlock.Text = tab + package.Price;
+            TransportTextBlock.Text = tab + package.Transport;
             DateTextBlock.Text = tab + package.BeginDate + " - " + package.EndDate;
             Rating.Value = package.Rating;
             if (UserManager.CurrentUser != null)
@@ -71,8 +96,8 @@ namespace VacationMasters.Screens
                 if (_orderId != 0) ReserveOrCancel.Content = "Cancel";
                 else ReserveOrCancel.Content = "Reserve";
                 if (_orderId != 0 && hasVoted == false)
-                { Rating.IsEnabled = true; }
-                else Rating.IsEnabled = false;
+                { IsRatingEnabled = true; }
+                else IsRatingEnabled = false;
             }
         }
 

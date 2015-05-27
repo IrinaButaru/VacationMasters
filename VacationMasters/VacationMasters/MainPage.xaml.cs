@@ -363,6 +363,11 @@ namespace VacationMasters
             SelectedPackage = package;
             this.PackagesPageView.UpdatePackage();
         }
+
+        public void UpdatePackages()
+        {
+            this.PackagesDisplayView.Initialize();
+        }
     }
 
 

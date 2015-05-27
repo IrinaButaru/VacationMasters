@@ -7,8 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:VacationMasters.Resources.Converters"
     xmlns:screens="using:VacationMasters.Screens"
+    xmlns:resources="using:VacationMasters.Resources"
     mc:Ignorable="d">
-
+   <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+   </UserControl.Resources>
     <Grid>
         <StackPanel>
             <StackPanel Height="40">
@@ -26,6 +29,12 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="LoginBtn" Content="Sign in" Width="100" HorizontalAlignment="Left" Click="LoginBtn_Click" />
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <HyperlinkButton Click="ForgotPwd_Click">Forgot password?</HyperlinkButton>

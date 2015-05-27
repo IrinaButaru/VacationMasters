@@ -45,7 +45,7 @@ namespace VacationMasters.Screens
             GroupManager = new GroupManager(DbWrapper);
             var preferences = await Task.Run(() => DbWrapper.GetAllPreferences());
             var groups = await Task.Run(() => GroupManager.GetAllGroups());
-           // CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
+            CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
             TypesGridView.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
             GroupsGridView.ItemsSource = groups.Select(c=>c.Trim()).ToArray();
             IsOperationInProgress = false;
@@ -158,6 +158,7 @@ namespace VacationMasters.Screens
         private void EraseJunk()
         {
             txtBoxUsrName.Text = txtBoxFrsName.Text = txtBoxLstName.Text = txtBoxEmail.Text = txtBoxPhone.Text = String.Empty;
+            pwdBox.Password = confirmPwdBox.Password = string.Empty;
         }
 
     }

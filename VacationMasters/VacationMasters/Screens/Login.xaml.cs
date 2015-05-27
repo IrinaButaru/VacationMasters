@@ -31,6 +31,7 @@ namespace VacationMasters.Screens
         }
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            IsOperationInProgress = true;
             string userName = this.txtBoxUsrName.Text;
             string password = this.pwdBox.Password;
 
@@ -67,8 +68,7 @@ namespace VacationMasters.Screens
                     {
                         page.IsNormalUser = true;
                     }
-
-                    VisualStateManager.GoToState(page, "PackagesV", true);
+                   
                 }
                 else
                 if (canLogin == 1)
@@ -104,7 +104,13 @@ namespace VacationMasters.Screens
                             messageDialog.ShowAsync();
                         }
                 _userManager.Login(userName, password);
+               
+                var frame1 = (Frame)Window.Current.Content;
+                var page1 = (MainPage)frame1.Content;
+                page1.UpdatePackages();
+                VisualStateManager.GoToState(page1, "PackagesV", true);
             });
+            IsOperationInProgress = false;
 
             this.txtBoxUsrName.Text = String.Empty;
             this.pwdBox.Password = String.Empty;
@@ -142,7 +148,19 @@ namespace VacationMasters.Screens
             }
         }
 
-
+        private bool _isOperationInProgress ;
+        public bool IsOperationInProgress
+        {
+            get { return _isOperationInProgress; }
+            set
+            {
+                if (value != _isOperationInProgress)
+                {
+                    _isOperationInProgress = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

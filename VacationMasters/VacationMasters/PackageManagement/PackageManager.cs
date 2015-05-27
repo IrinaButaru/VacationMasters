@@ -224,10 +224,11 @@ namespace VacationMasters.PackageManagement
                     return _dbWrapper.ReadPackages(command);
                 });
 
-                packagesByUserGroups.AddRange(temp);
+                packagesByUserGroups = RemoveDuplicated(packagesByUserGroups,
+                    temp);
             }
 
-            var noduplicatespackagesByUserGroups = packagesByUserGroups.Distinct().ToList();
+            var noduplicatespackagesByUserGroups = packagesByUserGroups;
 
             return noduplicatespackagesByUserGroups;
 

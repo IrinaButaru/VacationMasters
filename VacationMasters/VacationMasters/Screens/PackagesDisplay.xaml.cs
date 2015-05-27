@@ -18,6 +18,8 @@ namespace VacationMasters.Screens
         private bool _isOperationInProgress;
         private string _title = String.Empty;
         private string _price = String.Empty;
+
+        private DispatcherTimer dispatcherTimer;
         private byte[] _photo;
 
         private IUserManager _userManager;
@@ -49,7 +51,9 @@ namespace VacationMasters.Screens
             Initialize();
         }
 
-        private async void Initialize()
+ 
+
+        public async void Initialize()
         {
             IsOperationInProgress = true;
 

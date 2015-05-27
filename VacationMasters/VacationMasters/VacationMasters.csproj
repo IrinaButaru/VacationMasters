@@ -259,7 +259,7 @@
   <ItemGroup>
     <Reference Include="Callisto, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdPartyLibraries\Callisto.dll</HintPath>
+      <HintPath>..\packages\Callisto.1.4.0\lib\netcore451\Callisto.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.RT">
       <HintPath>..\..\ThirdPartyLibraries\MySql.Data.RT.dll</HintPath>
