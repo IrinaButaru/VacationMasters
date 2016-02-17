@@ -25,7 +25,7 @@ namespace VacationMasters.Screens
     public sealed partial class CancelOrder : UserControl, INotifyPropertyChanged
     {
         private bool _isOperationInProgress;
-       
+        private DispatcherTimer dispatcherTimer;
         private UserManager _userManager;
 
         private DbWrapper _dbWrapper;
@@ -33,10 +33,20 @@ namespace VacationMasters.Screens
         {
             this.DataContext = this;
             this.InitializeComponent();
-            FillOrders();
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(5);
+            dispatcherTimer.Start();
            
         }
 
+        private void dispatcherTimer_Tick(object sender, object e)
+        {
+            if (UserManager.CurrentUser == null)
+                return;
+            FillOrders();
+            dispatcherTimer.Stop();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,7 +76,7 @@ namespace VacationMasters.Screens
             IsOperationInProgress = true;
             _dbWrapper = new DbWrapper();
             _userManager = new UserManager(_dbWrapper);
-            List<string> orderUser = _userManager.GetOrders("Orasianu");
+            List<string> orderUser = _userManager.GetOrders(UserManager.CurrentUser.UserName);
             OrdersGridView.ItemsSource = orderUser.Select(c => c.Trim()).ToArray();
             IsOperationInProgress = false;
         }

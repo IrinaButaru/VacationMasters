@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using VacationMasters.Essentials;
 
 namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
-
         /// <summary>
         /// checks whether a given user satisfies the login conditions
         /// Conditions: existing and not banned
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        bool CanLogin(string username, string password);
+        int CanLogin(string username, string password);
 
         /// <summary>
         /// checks whether a given user exists
         /// Conditions: existing and password equivalence
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
+        /// <param name="userName"></param>
         /// <returns></returns>
         bool CheckIfUserExists(string userName);
 
@@ -33,11 +33,26 @@ namespace VacationMasters.UserManagement
         bool CheckCredentials(string userName, string password);
 
         /// <summary>
+        /// Checks if two password match.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
+        bool CheckIfPasswordMach(string password, string confirmPassword);
+
+        /// <summary>
+        /// Verifies a security question.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
+        bool CheckAnswer(string username, string answer);
+        /// <summary>
         /// Change password of an user
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="newPassword"></param>
-        void ChangePassword(string userName, string newPassword);
+        bool ChangePassword(string userName, string newPassword);
 
         /// <summary>
         /// Returns an user
@@ -86,7 +101,6 @@ namespace VacationMasters.UserManagement
         /// <param name="userName"></param>
         void UnbanUser(string userName);
 
-        /// <summary>
         /// Gets all the emails from database
         /// </summary>
         List<String> GetAllEmails();
@@ -95,7 +109,7 @@ namespace VacationMasters.UserManagement
 
         /// Logs the user
         /// </summary>
-        /// <param name="userName"></param>
+        /// <param name="username"></param>
         /// <param name="password"></param>
         void Login(string username, string password);
 

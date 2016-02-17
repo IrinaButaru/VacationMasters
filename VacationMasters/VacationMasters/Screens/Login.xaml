@@ -5,38 +5,46 @@
     xmlns:local="using:VacationMasters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:VacationMasters.Resources.Converters"
+    xmlns:screens="using:VacationMasters.Screens"
+    xmlns:resources="using:VacationMasters.Resources"
     mc:Ignorable="d">
-
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Margin="3" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" TextAlignment="Right">User Name</TextBlock>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" MinWidth="200" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-            <TextBox x:Name="txtBoxUsrName" Margin="3" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Stretch"></TextBox>
-            <TextBlock  x:Name="usrRequired" Margin="3" HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Top" Foreground="Red" FontSize="14">*</TextBlock>
-        </StackPanel>
-        <TextBlock Margin="3" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" TextAlignment="Right">Password</TextBlock>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" >
-            <PasswordBox Margin="3" x:Name="pwdBox" VerticalAlignment="Top" HorizontalAlignment="Stretch"></PasswordBox>
-            <TextBlock  x:Name="pwdRequired" Margin="3" TextAlignment="Left" VerticalAlignment="Top" Foreground="Red" FontSize="14">*</TextBlock>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Margin="3">
-            <Button Grid.Column="0" x:Name="LoginBtn" Content="Sign in" HorizontalAlignment="Left" Click="LoginBtn_Click" VerticalAlignment="Stretch"/>
-            <StackPanel Grid.Column="1">
-                <TextBlock Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom">Forgot password</TextBlock>
+   <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+   </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel Height="40">
+                <TextBlock Margin="3" FontFamily="Segoe UI" FontSize="24" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Sign up now for free."/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="3"  Width="88" TextAlignment="Right" VerticalAlignment="Center">User Name</TextBlock>
+                <TextBox x:Name="txtBoxUsrName" Margin="3" VerticalAlignment="Center" Width="200"></TextBox>
+                <TextBlock  x:Name="usrRequired" Margin="3"  Width="110" TextAlignment="Left" VerticalAlignment="Top" Foreground="Red" FontSize="14">*</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="3" VerticalAlignment="Center" Width="88" TextAlignment="Right">Password</TextBlock>
+                <PasswordBox Margin="3" x:Name="pwdBox" VerticalAlignment="Center" Width="200"></PasswordBox>
+                <TextBlock  x:Name="pwdRequired" Margin="3"  Width="110" TextAlignment="Left" VerticalAlignment="Top" Foreground="Red" FontSize="14">*</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="LoginBtn" Content="Sign in" Width="100" HorizontalAlignment="Left" Click="LoginBtn_Click" />
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <HyperlinkButton Click="ForgotPwd_Click">Forgot password?</HyperlinkButton>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock  TextWrapping="Wrap"  TextAlignment="Right" VerticalAlignment="Center">Don't have an account yet? Click</TextBlock>
-                    <TextBlock  TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"> HERE</TextBlock>
-                    <TextBlock  TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Center"> to Sign up.</TextBlock> 
+                    <TextBlock  TextWrapping="Wrap"  TextAlignment="Right" VerticalAlignment="Center">Don't have an account yet? Click  </TextBlock>
+                    <HyperlinkButton Click="CreateAccount_Click">HERE</HyperlinkButton>
+                    <TextBlock  TextWrapping="Wrap" TextAlignment="Left" VerticalAlignment="Center">   to Sign up.</TextBlock>
                 </StackPanel>
             </StackPanel>
-            </StackPanel>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

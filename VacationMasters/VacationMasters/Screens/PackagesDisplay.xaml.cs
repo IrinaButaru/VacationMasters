@@ -18,6 +18,8 @@ namespace VacationMasters.Screens
         private bool _isOperationInProgress;
         private string _title = String.Empty;
         private string _price = String.Empty;
+
+        private DispatcherTimer dispatcherTimer;
         private byte[] _photo;
 
         private IUserManager _userManager;
@@ -37,11 +39,10 @@ namespace VacationMasters.Screens
                 }
             }
         }
-        
 
         public PackagesDisplay()
         {
-            this.DataContext = this;  
+            this.DataContext = this;
 
             this.InitializeComponent();
 
@@ -50,18 +51,22 @@ namespace VacationMasters.Screens
             Initialize();
         }
 
-        private async void Initialize()
+ 
+
+        public async void Initialize()
         {
             IsOperationInProgress = true;
 
             DbWrapper = new DbWrapper();
             UserManager = new UserManager(DbWrapper);
+       
             PackManager = new PackageManager(DbWrapper);
-            MainPage.CurrentUser = UserManager.GetUser("abc");
-            if (MainPage.CurrentUser == null)
+
+            if (UserManager.CurrentUser == null) 
                 List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
             else
                 List = new ObservableCollection<Package>(PackManager.GetPackagesByRecommendation());
+           
             IsOperationInProgress = false;
         }
 
@@ -90,9 +95,9 @@ namespace VacationMasters.Screens
             var frame = (Frame)Window.Current.Content;
             var page = (MainPage)frame.Content;
             page.UpdateSelectedPackage((Package)e.ClickedItem);
+       
             VisualStateManager.GoToState(page, "PackagePage", true);
         }
     }
-
 }
 

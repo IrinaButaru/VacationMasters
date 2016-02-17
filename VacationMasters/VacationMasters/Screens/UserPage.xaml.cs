@@ -26,25 +26,33 @@ namespace VacationMasters.Screens
 {
     public sealed partial class UserPage : UserControl, INotifyPropertyChanged
     {
-        private DbWrapper _dbWrapper ;
+        private DbWrapper _dbWrapper;
         private UserManager _userManager;
         private GroupManager _groupManager;
 
         private bool _isOperationInProgress;
+
+        private DispatcherTimer dispatcherTimer;
         public UserPage()
         {
             this.DataContext = this;
             InitializeComponent();
             _dbWrapper = new DbWrapper();
             _userManager = new UserManager(_dbWrapper);
-            
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(5);
+            dispatcherTimer.Start();
            
-            FillPreferencesCountry();
-            FillPreferencesType();
-            FillGroups();
-            FillRadioButton();
+        }
+
+        private void dispatcherTimer_Tick(object sender, object e)
+        {
+            if (UserManager.CurrentUser == null)
+                return;
 
             Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => { Initialize(); });
+            dispatcherTimer.Stop();
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,7 +72,7 @@ namespace VacationMasters.Screens
                 {
                     _isOperationInProgress = value;
                     NotifyPropertyChanged();
-                   
+
                 }
             }
         }
@@ -75,13 +83,13 @@ namespace VacationMasters.Screens
             _dbWrapper = new DbWrapper();
             _userManager = new UserManager(_dbWrapper);
             var preferences = await Task.Run(() => _dbWrapper.GetAllPreferences());
-           // var preferencesUseit Task.Run(() =>  _userManager.GetPreferencesCountryUser(UserName));
-            List<string> preferencesUser = _userManager.GetPreferencesCountryUser("Orasianu");
+            // var preferencesUseit Task.Run(() =>  _userManager.GetPreferencesCountryUser(UserName));
+            List<string> preferencesUser = _userManager.GetPreferencesCountryUser(UserManager.CurrentUser.UserName);
             CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
-           foreach (string i in preferencesUser)
+            foreach (string i in preferencesUser)
             {
                 if (CountriesGridView.Items != null)
-                    foreach ( var j in CountriesGridView.Items)
+                    foreach (var j in CountriesGridView.Items)
                     {
                         if (j.ToString().Equals(i))
                         {
@@ -89,11 +97,11 @@ namespace VacationMasters.Screens
                         }
                     }
             }
-            
+
             IsOperationInProgress = false;
         }
 
-    
+
 
         private async void FillPreferencesType()
         {
@@ -101,12 +109,12 @@ namespace VacationMasters.Screens
             _dbWrapper = new DbWrapper();
             _userManager = new UserManager(_dbWrapper);
             var preferences = await Task.Run(() => _dbWrapper.GetAllPreferences());
-            List<string> preferencesUser = _userManager.GetPreferencesTypeUser("Orasianu");
+            List<string> preferencesUser = _userManager.GetPreferencesTypeUser(UserManager.CurrentUser.UserName);
             TypesGridView.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
-                foreach (string i in preferencesUser)
+            foreach (string i in preferencesUser)
             {
                 if (TypesGridView.Items != null)
-                    foreach ( var j in TypesGridView.Items)
+                    foreach (var j in TypesGridView.Items)
                     {
                         if (j.ToString().Equals(i))
                         {
@@ -123,7 +131,7 @@ namespace VacationMasters.Screens
             IsOperationInProgress = true;
             _groupManager = new GroupManager(_dbWrapper);
             var groups = await Task.Run(() => _groupManager.GetAllGroups());
-            List<string> groupsUser = _groupManager.GetUserGroup("Orasianu");
+            List<string> groupsUser = _groupManager.GetUserGroup(UserManager.CurrentUser.UserName);
             GroupsGridView.ItemsSource = groups.Select(c => c.Trim()).ToArray();
             foreach (string i in groupsUser)
             {
@@ -140,11 +148,16 @@ namespace VacationMasters.Screens
         }
 
 
-     
+
 
         private void Initialize()
         {
-           
+
+            FillPreferencesCountry();
+            FillPreferencesType();
+            FillGroups();
+            FillRadioButton();
+
             FillText();
             FillPassword();
             FillConfirmPassword();
@@ -152,14 +165,14 @@ namespace VacationMasters.Screens
         }
 
         public static string UserName { set; get; }
-       
+
         public void FillText()
         {
-           text_box_email.Text = _userManager.GetMail("Orasianu");
+            text_box_email.Text = _userManager.GetMail(UserManager.CurrentUser.UserName);
         }
         public void FillPassword()
         {
-             password_box.Password = "Password";
+            password_box.Password = "Password";
         }
         public void FillConfirmPassword()
         {
@@ -168,8 +181,8 @@ namespace VacationMasters.Screens
 
         private void OrderHistory(object sender, RoutedEventArgs e)//OrderHistory
         {
-            var frame = (Frame) Window.Current.Content;
-            var page = (MainPage) frame.Content;
+            var frame = (Frame)Window.Current.Content;
+            var page = (MainPage)frame.Content;
             VisualStateManager.GoToState(page, "CancelOrderControl", true);
         }
         private void Browse(object sender, RoutedEventArgs e)
@@ -196,7 +209,7 @@ namespace VacationMasters.Screens
                 radio_button.IsChecked = false;
             }
         }
-        
+
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
             bool var;
@@ -212,7 +225,7 @@ namespace VacationMasters.Screens
             var preferences = countriesPreferences.Concat(typesPreferences).ToList();
             var groups = GroupsGridView.SelectedItems.Select(c => c.ToString()).ToList();
             _userManager.UpdateUser(
-                "Orasianu",
+                UserManager.CurrentUser.UserName,
                 var,
                 text_box_email.Text,
                 password_box.Password,

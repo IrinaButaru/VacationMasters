@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,9 +15,16 @@ namespace VacationMasters
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
+        
         public DbWrapper DbWrapper { get; set; }
+        public bool _isNotLogged = true;
+        public bool _isLogged = false;
+        public bool _isAgent = false;
+        public bool _isAdmin = false;
+        public bool _isNormalUser = false;
+        private string _helou;
         public static User CurrentUser { get; set; }
         public static Package SelectedPackage { get; set; }
         public static int search_criterion;
@@ -24,6 +34,79 @@ namespace VacationMasters
         public static DateTime pk_begin_date;
         public static DateTime pk_end_date;
         public static String pk_type;
+
+        #region Properties
+        public bool IsNotLogged
+        {
+            get { return _isNotLogged; }
+            set
+            {
+                if (_isNotLogged != value)
+                {
+                    _isNotLogged = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool IsAgent
+        {
+            get { return _isAgent; }
+            set
+            {
+                if (_isAgent != value)
+                {
+                    _isAgent = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set
+            {
+                if (_isAdmin != value)
+                {
+                    _isAdmin = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool IsNormalUser
+        {
+            get { return _isNormalUser; }
+            set
+            {
+                if (_isNormalUser != value)
+                {
+                    _isNormalUser = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool IsLogged
+        {
+            get { return _isLogged; }
+            set
+            {
+                if (_isLogged != value)
+                {
+                    _isLogged = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string Hellou
+        {
+            get { return _helou; }
+            set
+            {
+                _helou = value;
+                NotifyPropertyChanged();
+            }
+        }
+        #endregion
+
          public MainPage()
         {
              this.DbWrapper = new DbWrapper();
@@ -45,6 +128,7 @@ namespace VacationMasters
                 Home(null, null);
             });
         }
+      
 
         public Visibility CollapsedVisibility
         {
@@ -252,6 +336,24 @@ namespace VacationMasters
             VisualStateManager.GoToState(this, "LoginControl", true);
         }
 
+        private void SignOutControl(object sender, RoutedEventArgs e)
+        {
+            UserManager.CurrentUser = null;
+            IsNotLogged = true;
+            IsLogged = IsAdmin = IsAgent = IsNormalUser = false;
+        }
+
+       
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         private void GoToAgentPage(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "AgentPageControl", true);
@@ -260,6 +362,11 @@ namespace VacationMasters
         {
             SelectedPackage = package;
             this.PackagesPageView.UpdatePackage();
+        }
+
+        public void UpdatePackages()
+        {
+            this.PackagesDisplayView.Initialize();
         }
     }
 

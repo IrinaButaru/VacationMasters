@@ -6,12 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:screens="using:VacationMasters.Screens"
-    d:DataContext="{d:DesignInstance Type=local:MainPage, IsDesignTimeCreatable=True}"
+    xmlns:converters="using:VacationMasters.Resources.Converters"
+    d:DataContext="{d:DesignInstance Type=local:MainPage, 
+                                     IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid >
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/sunset.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/Resources/Images/sunset.jpg"/>
         </Grid.Background>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -45,11 +52,19 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                       <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -77,9 +92,12 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
@@ -90,7 +108,7 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -106,13 +124,24 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
@@ -123,15 +152,7 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -147,7 +168,14 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -155,6 +183,10 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -164,15 +196,7 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -188,7 +212,31 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -196,15 +244,15 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="ChangePasswordV">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -213,6 +261,30 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -228,11 +300,27 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -240,19 +328,7 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -401,17 +477,14 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
                                                  Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -421,6 +494,10 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -495,12 +572,23 @@
                                  Content="Login" 
                                  HorizontalAlignment="Right"
                                  Grid.Column="0"
-                                 Click="GoToLoginControl"/>
+                                 Click="GoToLoginControl"
+                                 Visibility="{Binding IsNotLogged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <HyperlinkButton x:Name="register"
                                  Content="Register" 
                                  HorizontalAlignment="Right"
                                  Grid.Column="1"
-                                 Click="GoToRegisterControl"/>
+                                 Click="GoToRegisterControl"
+                                 Visibility="{Binding IsNotLogged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <StackPanel  Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Visibility="{Binding IsLogged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock x:Name="GreetingBlock"  FontFamily="Segoe UI" FontSize="16" Margin="3" VerticalAlignment="Center"  TextAlignment="Left" Text="{Binding Hellou}"/>
+                    <HyperlinkButton x:Name="SignOut"
+                                 Content="Sign Out"
+                                 HorizontalAlignment="Right"
+                                 Click="SignOutControl"/>
+                </StackPanel>
+                
+               
             </Grid>
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
@@ -512,10 +600,13 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="home" Content="Home" FontSize="16"  HorizontalAlignment="Left" Grid.Column="0" Click="Home"  />
-                <Button x:Name="user_panel" Content="User Panel" FontSize="16"  HorizontalAlignment="Left" Grid.Column="2" Click="UserPanel"  />
-                <Button x:Name="admin_control" Content="Admin Page" FontSize="16"  HorizontalAlignment="Left" Grid.Column="4" Click="GoToAdminControl"/>
+                <Button x:Name="user_panel" Content="User Panel" FontSize="16"  HorizontalAlignment="Left" Grid.Column="2" Click="UserPanel"
+                        Visibility="{Binding IsLogged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Button x:Name="admin_control" Content="Admin Page" FontSize="16"  HorizontalAlignment="Left" Grid.Column="4" Click="GoToAdminControl"
+                        Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <Button x:Name="contact" Content="Contact" FontSize="16"  HorizontalAlignment="Left" Grid.Column="3" Click="GoToContactControl" />
-                <Button x:Name ="AgentButton" Content="Agent Page" Grid.Column="5" Click="GoToAgentPage"/>
+                <Button x:Name ="AgentButton" Content="Agent Page" Grid.Column="5" Click="GoToAgentPage"
+                        Visibility="{Binding IsAgent, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </Grid>
         </Grid >
         <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,0,63"  >
@@ -527,6 +618,7 @@
                 <screens:CancelOrder x:Name ="CancelOrderControlView" Visibility="Collapsed"/>
                 <screens:Contact x:Name="ContactControlView" Visibility="Collapsed" />
                 <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
+                <screens:ChangePassword x:Name="ChangePasswordView" Visibility="Collapsed"/>
                 <screens:PackagesDisplay x:Name="PackagesDisplayView" Visibility="Collapsed"/>
                 <screens:AgentPage x:Name="AgentPageView" Visibility ="Collapsed"/>
                 <screens:PackagePage x:Name="PackagesPageView" Visibility="Collapsed"/>

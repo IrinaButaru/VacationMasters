@@ -65,10 +65,11 @@ namespace VacationMasters.PackageManagement
             var sql = string.Format("Delete From ChoosePackage Where IDPackage = {0}; DELETE FROM Packages WHERE ID = {0};  ", package.ID);
             _dbWrapper.QueryValue<object>(sql);
         }
-
+       
         public List<Package> GetPackagesByPreferences()
         {
-            User loggedUser = MainPage.CurrentUser;
+            User loggedUser = UserManager.CurrentUser;
+
             List<Package> packagesByPrefrences = new List<Package>();
             var destinations = _userManager.GetStrings("Select Name From Destinations");
             var destMatched = new List<string>();
@@ -100,7 +101,8 @@ namespace VacationMasters.PackageManagement
 
         public List<Package> GetPackagesByHistoric()
         {
-            User loggedUser = MainPage.CurrentUser;
+            User loggedUser = UserManager.CurrentUser;
+
             List<Package> packagesByHistoric = new List<Package>();
 
             string sql = string.Format("Select p.ID,p.Name,p.Type,p.Included,p.Transport,p.Price,p.SearchIndex,p.Rating,p.BeginDate,p.EndDate,p.Picture from packages p join choosepackage cp on (p.ID = cp.IDPackage)" +
@@ -186,10 +188,10 @@ namespace VacationMasters.PackageManagement
 
         }
 
-
         public List<Package> GetPackagesByUserGroups()
         {
-            User loggedUser = MainPage.CurrentUser;
+            User loggedUser = UserManager.CurrentUser;
+     
             var packagesByUserGroups = new List<Package>();
 
             var sql = string.Format("Select Name from Groups g join ChooseGroups cg on (g.ID = cg.IDGroup)" +
@@ -222,10 +224,11 @@ namespace VacationMasters.PackageManagement
                     return _dbWrapper.ReadPackages(command);
                 });
 
-                packagesByUserGroups.AddRange(temp);
+                packagesByUserGroups = RemoveDuplicated(packagesByUserGroups,
+                    temp);
             }
 
-            var noduplicatespackagesByUserGroups = packagesByUserGroups.Distinct().ToList();
+            var noduplicatespackagesByUserGroups = packagesByUserGroups;
 
             return noduplicatespackagesByUserGroups;
 

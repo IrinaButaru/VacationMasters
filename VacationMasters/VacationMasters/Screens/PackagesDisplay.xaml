@@ -11,12 +11,12 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-  <UserControl.Resources>
-    <ResourceDictionary>
-      <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    </ResourceDictionary>
-  </UserControl.Resources>
-  <GridView
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <GridView
        x:Name="itemGridView"
        Margin="2"
        ItemsSource="{Binding List}"
@@ -61,6 +61,5 @@
     <ScrollViewer Visibility="{Binding IsOperationInProgress, Converter = {StaticResource BooleanToVisibilityConverter}}">
       <resources:CircularProgressBar/>
     </ScrollViewer>
-
-  </GridView>
+    </GridView>
 </UserControl>

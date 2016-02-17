@@ -61,6 +61,7 @@ namespace VacationMasters.Screens
             var groups = GroupsGridView.SelectedItems.Select(c => c.ToString()).ToList();
             var user = new User(txtBoxUsrName.Text, txtBoxFrsName.Text, txtBoxLstName.Text, txtBoxEmail.Text, txtBoxPhone.Text, false, "User", null);
             UserManager.AddUser(user, pwdBox.Password, preferences, groups);
+            EraseJunk();
         }
 
         private bool VerifyRegisterFields()
@@ -152,6 +153,12 @@ namespace VacationMasters.Screens
             string pattern = @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$";
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(phoneNumber);
+        }
+
+        private void EraseJunk()
+        {
+            txtBoxUsrName.Text = txtBoxFrsName.Text = txtBoxLstName.Text = txtBoxEmail.Text = txtBoxPhone.Text = String.Empty;
+            pwdBox.Password = confirmPwdBox.Password = string.Empty;
         }
 
     }

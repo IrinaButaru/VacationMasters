@@ -46,7 +46,7 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Rating" VerticalAlignment="Center" FontSize="18" Grid.Column="0" Grid.Row="0" />
-                <controls:Rating x:Name ="Rating" Value="3" Margin="0,0,0,0"  ItemCount="5" Grid.Column="1" Grid.Row="0"  Background="Transparent" Foreground="Gold"  Tapped="Rating_OnTapped" IsEnabled="False"/>
+                <controls:Rating x:Name ="Rating" Value="3" Margin="0,0,0,0"  ItemCount="5" Grid.Column="1" Grid.Row="0"  Background="Transparent" Foreground="Gold"  Tapped="Rating_OnTapped" IsEnabled="{Binding IsRatingEnabled}"/>
                 <TextBlock Text="Name" VerticalAlignment="Center" FontSize="18" Grid.Column="0" Grid.Row="1"  />
                 <TextBlock x:Name="NameTextBlock"  VerticalAlignment="Center" FontSize="18" Grid.Column="1" Grid.Row="1"  />
                 <TextBlock Text="Type"   VerticalAlignment="Center" FontSize="18" Grid.Row="2" Grid.Column="0"  />
